@@ -7,7 +7,7 @@ pipeline {
          stage('Init') { 
             steps {
                 echo 'hello!' 
-                echo ${PATH}
+                echo "${PATH}"
             }
         }
         stage('Build') { 
