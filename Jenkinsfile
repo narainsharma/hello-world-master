@@ -7,15 +7,20 @@ pipeline {
             bat 'mvnw.cmd clean'
         }
        }
-        stage('Build') { 
+       stage('Test'){ 
+        steps {
+            bat 'mvnw.cmd test' 
+        }
+        post{
+            always{
+                junit 'build/test-results/test/*.xml'
+            }
+        }
+       }
+       stage('Build') { 
             steps {
                 bat 'mvnw.cmd install' 
             }
-        }
-        stage('Test') { 
-            steps {
-                bat 'mvnw.cmd test' 
-            }
-        }
+        }  
     }
 }
