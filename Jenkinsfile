@@ -1,14 +1,20 @@
 pipeline {
     agent any
     stages {
-         stage('Init') { 
-            steps {
-                echo 'hello!' 
-            }
+       
+       stage('Cleanup'){
+        steps{
+            bat 'mvnw.cmd clean'
         }
+       }
         stage('Build') { 
             steps {
-                bat 'mvnw.cmd clean install' 
+                bat 'mvnw.cmd install' 
+            }
+        }
+        stage('Test') { 
+            steps {
+                bat 'mvnw.cmd test' 
             }
         }
     }
