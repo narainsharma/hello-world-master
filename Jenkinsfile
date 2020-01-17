@@ -41,7 +41,7 @@ pipeline {
       }
       steps{
 
-        sh 'docker build -t $IMAGE_TAG .'
+        sh 'docker build -t test_image .'
       }
     }
   }
