@@ -10,7 +10,7 @@ pipeline {
     HOME = '.'
     APP_NAME= 'hello-world-master'
     APP_IMAGE_VERSION ='1.0'
-    IMAGE_TAG = "$APP_NAME:$APP_IMAGE_VERSION-$BUILD_NUMBER}"
+    IMAGE_TAG = "$APP_NAME:$APP_IMAGE_VERSION-$BUILD_NUMBER"
     }
 
     stages {      
