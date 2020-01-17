@@ -1,26 +1,10 @@
 pipeline {
     agent any
-    stages {
-       
+    stages {      
        stage('Cleanup'){
         steps{
-            bat 'mvnw.cmd clean'
+            sh 'mvn clean'
         }
-       }
-       stage('Test'){ 
-        steps {
-            bat 'mvnw.cmd test' 
-        }
-        post{
-            always{
-                junit 'target/surefire-reports/*.xml'
-            }
-        }
-       }
-       stage('Build') { 
-            steps {
-                bat 'mvnw.cmd install' 
-            }
-        }  
+       } 
     }
 }
