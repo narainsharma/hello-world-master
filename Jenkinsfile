@@ -35,10 +35,6 @@ pipeline {
     }
 
     stage('Build Docker Image'){
-      agent any
-      environment {
-        HOME = '.'
-      }
       steps{
 
         sh 'docker build -t test_image .'
