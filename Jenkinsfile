@@ -8,6 +8,9 @@ pipeline {
 
     environment {
     HOME = '.'
+    APP_NAME= 'hello-world-master'
+    APP_IMAGE_VERSION ='1.0'
+    IMAGE_TAG = "$APP_NAME:$APP_IMAGE_VERSION-$BUILD_NUMBER}"
     }
 
     stages {      
@@ -29,6 +32,17 @@ pipeline {
     stage('Build'){
       steps{
         sh 'mvn package'
+      }
+    }
+
+    stage('Build Docker Image'){
+      steps{
+        sh """
+docker build . -t $IMAGE_TAG
+docker images
+docker images --filter "dangling=true"
+docker image prune -f
+                """
       }
     }
   }
