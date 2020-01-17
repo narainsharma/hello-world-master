@@ -7,7 +7,6 @@ pipeline {
     }    
 
     environment {
-    HOME = '.'
     APP_NAME= 'hello-world-master'
     APP_IMAGE_VERSION ='1.0'
     IMAGE_TAG = "$APP_NAME:$APP_IMAGE_VERSION-$BUILD_NUMBER"
@@ -37,6 +36,9 @@ pipeline {
 
     stage('Build Docker Image'){
       agent any
+      environment {
+        HOME = '.'
+      }
       steps{
 
         sh 'docker build -t $IMAGE_TAG .'
