@@ -1,4 +1,4 @@
-FROM maven:3.6-jdk-8-alpine AS build
+FROM maven:3.6-jdk-8-alpine
 WORKDIR /usr/src/app
 COPY pom.xml .
 RUN mvn dependency:go-offline
