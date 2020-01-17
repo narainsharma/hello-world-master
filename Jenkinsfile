@@ -37,12 +37,7 @@ pipeline {
 
     stage('Build Docker Image'){
       steps{
-        sh """
-docker build . -t $IMAGE_TAG
-docker images
-docker images --filter "dangling=true"
-docker image prune -f
-                """
+        sh 'docker build . -t $IMAGE_TAG'
       }
     }
   }
