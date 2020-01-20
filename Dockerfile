@@ -1,5 +1,4 @@
 FROM openjdk:8
-RUN useradd --create-home -s /bin/bash java
-USER java
-COPY /usr/src/app/target/*.jar /usr/app/*.jar
-ENTRYPOINT ["java","-jar","/usr/app/*.jar"]
+ARG JAR_FILE= /usr/src/app/target/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
