@@ -9,37 +9,37 @@ pipeline {
 
     stages {    
 
-      stage('Clean, Test and Build'){
+      stage('Clean Test Build'){
         agent {
           docker {
           image 'maven:3-alpine'
           }
         }
 
-        stage('Cleanup'){   
-        steps{
-            sh 'mvn clean'
-        }
-       }
-
-       stage('Test'){
-        steps{
-          sh 'mvn test'
-        }
-        post{
-          always {
-                    junit 'target/surefire-reports/*.xml'
+        stages{
+          stage('Cleanup'){   
+            steps{
+              sh 'mvn clean'
+            }
           }
-       } 
-    }
-
-    stage('Build'){
-      steps{
-        sh 'mvn package'
+          stage('Test'){
+            steps{
+                sh 'mvn test'
+            }
+            post{
+              always {
+                        junit 'target/surefire-reports/*.xml'
+               }
+             } 
+          }
+          stage('Build'){
+            steps{
+              sh 'mvn package'
+            }
+          }
+        } 
       }
-    }
-    }  
-       
+        
     stage('Build Docker Image'){
       agent any
       steps{
