@@ -1,5 +1,5 @@
 pipeline {
-    agent master
+    agent any
 
     environment {
     APP_NAME= 'hello-world-master'
@@ -9,11 +9,21 @@ pipeline {
 
     stages {      
        stage('Cleanup'){
+        agent {
+          docker {
+          image 'maven:3-alpine'
+          }
+        }    
         steps{
             sh 'mvn clean'
         }
        }
        stage('Test'){
+        agent {
+          docker {
+          image 'maven:3-alpine'
+          }
+        }
         steps{
           sh 'mvn test'
         }
@@ -24,6 +34,11 @@ pipeline {
        } 
     }
     stage('Build'){
+      agent {
+          docker {
+          image 'maven:3-alpine'
+          }
+        }
       steps{
         sh 'mvn package'
       }
