@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-     docker {
-          image 'maven:3-alpine'
-      }
-    }    
+    agent any
 
     environment {
     APP_NAME= 'hello-world-master'
