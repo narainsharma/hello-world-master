@@ -7,17 +7,21 @@ pipeline {
     IMAGE_TAG = "$APP_NAME:$APP_IMAGE_VERSION-$BUILD_NUMBER"
     }
 
-    stages {      
-       stage('Cleanup'){
+    stages {    
+
+      stage('Clean, Test and Build'){
         agent {
           docker {
           image 'maven:3-alpine'
           }
-        }    
+        }
+
+        stage('Cleanup'){   
         steps{
             sh 'mvn clean'
         }
        }
+
        stage('Test'){
         steps{
           sh 'mvn test'
@@ -28,12 +32,14 @@ pipeline {
           }
        } 
     }
+
     stage('Build'){
       steps{
         sh 'mvn package'
       }
     }
-
+    }  
+       
     stage('Build Docker Image'){
       agent any
       steps{
