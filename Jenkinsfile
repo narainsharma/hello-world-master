@@ -5,7 +5,7 @@ pipeline {
     APP_NAME= 'hello-world-master'
     APP_IMAGE_VERSION ='1.0'
     NEXUS_HOST = 'mgmt-ingress-alb-353051769.us-east-1.elb.amazonaws.com:8082'
-    IMAGE_TAG = "$APP_NAME:$APP_IMAGE_VERSION-$BUILD_NUMBER"
+    IMAGE_TAG = "$APP_NAME:$APP_IMAGE_VERSION-$BUILD_NUMBER-${env.GIT_COMMIT.take(8)}"
     }
 
     stages {    
