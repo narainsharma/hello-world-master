@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent master
 
     environment {
     APP_NAME= 'hello-world-master'
