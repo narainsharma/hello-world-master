@@ -8,16 +8,14 @@ pipeline {
     IMAGE_TAG = "$APP_NAME:$APP_IMAGE_VERSION-$BUILD_NUMBER-${env.GIT_COMMIT.take(8)}"
     }
 
-    stages {    
-
-      stage('Clean Test Build'){
-        agent {
-          docker {
-          image 'maven:3-alpine'
-          }
-        }
-
+    stages {           
         stages{
+
+          agent {
+            docker {
+            image 'maven:3-alpine'
+            }
+          }
           stage('Cleanup'){   
             steps{
               sh 'mvn clean'
@@ -39,7 +37,7 @@ pipeline {
             }
           }
         } 
-      }
+      
         
     stage('Build Docker Image'){
       steps{       
